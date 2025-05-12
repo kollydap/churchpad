@@ -1,0 +1,585 @@
+{
+  "info": {
+    "_postman_id": "dce00e31-5ae5-4aa1-8f5d-6f9a1b3ecb2c",
+    "name": "Subscription Service API",
+    "description": "A RESTful API built with Django and Django REST Framework that allows you to manage subscription plans and subscriptions for your service.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Plans",
+      "description": "Endpoints for managing subscription plans",
+      "item": [
+        {
+          "name": "List all plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/plans/",
+              "host": ["{{base_url}}"],
+              "path": ["plans", ""]
+            },
+            "description": "Returns a list of all available subscription plans."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/plans/",
+                  "host": ["{{base_url}}"],
+                  "path": ["plans", ""]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Basic Plan\",\n        \"price\": \"9.99\",\n        \"description\": \"Basic features for individuals\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Premium Plan\",\n        \"price\": \"19.99\",\n        \"description\": \"Advanced features for professionals\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Enterprise Plan\",\n        \"price\": \"49.99\",\n        \"description\": \"Full feature set for businesses\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get plan details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/plans/1/",
+              "host": ["{{base_url}}"],
+              "path": ["plans", "1", ""]
+            },
+            "description": "Returns details for a specific subscription plan."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/plans/1/",
+                  "host": ["{{base_url}}"],
+                  "path": ["plans", "1", ""]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"name\": \"Basic Plan\",\n    \"price\": \"9.99\",\n    \"description\": \"Basic features for individuals\"\n}"
+            },
+            {
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/plans/999/",
+                  "host": ["{{base_url}}"],
+                  "path": ["plans", "999", ""]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"detail\": \"Not found.\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Endpoints for managing subscriptions",
+      "item": [
+        {
+          "name": "List active subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/",
+              "host": ["{{base_url}}"],
+              "path": ["subscriptions", ""]
+            },
+            "description": "Returns a list of all active subscriptions."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscriptions/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscriptions", ""]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"subscriber\": {\n            \"id\": 1,\n            \"name\": \"John Doe\",\n            \"email\": \"john@example.com\",\n            \"phone_number\": \"+1234567890\",\n            \"created_at\": \"2025-05-12T08:30:00Z\"\n        },\n        \"plan\": {\n            \"id\": 1,\n            \"name\": \"Basic Plan\",\n            \"price\": \"9.99\",\n            \"description\": \"Basic features for individuals\"\n        },\n        \"status\": \"active\",\n        \"start_date\": \"2025-05-12T08:30:00Z\",\n        \"end_date\": null,\n        \"created_at\": \"2025-05-12T08:30:00Z\"\n    },\n    {\n        \"id\": 2,\n        \"subscriber\": {\n            \"id\": 2,\n            \"name\": \"Jane Smith\",\n            \"email\": \"jane@example.com\",\n            \"phone_number\": \"+1987654321\",\n            \"created_at\": \"2025-05-11T14:15:00Z\"\n        },\n        \"plan\": {\n            \"id\": 2,\n            \"name\": \"Premium Plan\",\n            \"price\": \"19.99\",\n            \"description\": \"Advanced features for professionals\"\n        },\n        \"status\": \"active\",\n        \"start_date\": \"2025-05-11T14:15:00Z\",\n        \"end_date\": null,\n        \"created_at\": \"2025-05-11T14:15:00Z\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get subscription details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/1/",
+              "host": ["{{base_url}}"],
+              "path": ["subscriptions", "1", ""]
+            },
+            "description": "Returns details for a specific subscription."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscriptions/1/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscriptions", "1", ""]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"subscriber\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"john@example.com\",\n        \"phone_number\": \"+1234567890\",\n        \"created_at\": \"2025-05-12T08:30:00Z\"\n    },\n    \"plan\": {\n        \"id\": 1,\n        \"name\": \"Basic Plan\",\n        \"price\": \"9.99\",\n        \"description\": \"Basic features for individuals\"\n    },\n    \"status\": \"active\",\n    \"start_date\": \"2025-05-12T08:30:00Z\",\n    \"end_date\": null,\n    \"created_at\": \"2025-05-12T08:30:00Z\"\n}"
+            },
+            {
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscriptions/999/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscriptions", "999", ""]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"detail\": \"Not found.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone_number\": \"+1234567890\",\n    \"plan_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/subscribe/",
+              "host": ["{{base_url}}"],
+              "path": ["subscribe", ""]
+            },
+            "description": "Creates a new subscription for a user. If the user doesn't exist, a new subscriber record is created. A Stripe customer and subscription are also created."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone_number\": \"+1234567890\",\n    \"plan_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/subscribe/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscribe", ""]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"subscriber\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"john@example.com\",\n        \"phone_number\": \"+1234567890\",\n        \"created_at\": \"2025-05-12T08:30:00Z\"\n    },\n    \"plan\": {\n        \"id\": 1,\n        \"name\": \"Basic Plan\",\n        \"price\": \"9.99\",\n        \"description\": \"Basic features for individuals\"\n    },\n    \"status\": \"active\",\n    \"start_date\": \"2025-05-12T08:30:00Z\",\n    \"end_date\": null,\n    \"created_at\": \"2025-05-12T08:30:00Z\"\n}"
+            },
+            {
+              "name": "Bad Request - Invalid Plan",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone_number\": \"+1234567890\",\n    \"plan_id\": 999\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/subscribe/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscribe", ""]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"plan_id\": [\"Selected plan does not exist\"]\n}"
+            },
+            {
+              "name": "Bad Request - Missing Data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+1234567890\",\n    \"plan_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/subscribe/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscribe", ""]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"email\": [\"This field is required.\"]\n}"
+            },
+            {
+              "name": "Bad Request - Invalid Email",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"invalid-email\",\n    \"phone_number\": \"+1234567890\",\n    \"plan_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/subscribe/",
+                  "host": ["{{base_url}}"],
+                  "path": ["subscribe", ""]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"email\": [\"Enter a valid email address.\"]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cancel subscription",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/unsubscribe/1/",
+              "host": ["{{base_url}}"],
+              "path": ["unsubscribe", "1", ""]
+            },
+            "description": "Cancels an active subscription. The subscription is canceled both in the local database and in Stripe."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/unsubscribe/1/",
+                  "host": ["{{base_url}}"],
+                  "path": ["unsubscribe", "1", ""]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/unsubscribe/999/",
+                  "host": ["{{base_url}}"],
+                  "path": ["unsubscribe", "999", ""]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"detail\": \"Not found.\"\n}"
+            },
+            {
+              "name": "Bad Request - Not Active",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/unsubscribe/3/",
+                  "host": ["{{base_url}}"],
+                  "path": ["unsubscribe", "3", ""]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"This subscription is not active\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "description": "Endpoints for handling external service webhooks",
+      "item": [
+        {
+          "name": "Stripe webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Stripe-Signature",
+                "value": "{{stripe_webhook_signature}}",
+                "description": "Signature header from Stripe"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"evt_123456789\",\n    \"object\": \"event\",\n    \"api_version\": \"2024-05-01\",\n    \"created\": 1683892800,\n    \"data\": {\n        \"object\": {\n            \"id\": \"sub_12345\",\n            \"object\": \"subscription\",\n            \"status\": \"canceled\"\n        }\n    },\n    \"type\": \"customer.subscription.deleted\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/webhook/",
+              "host": ["{{base_url}}"],
+              "path": ["webhook", ""]
+            },
+            "description": "Endpoint for receiving webhook events from Stripe. This handles subscription lifecycle events."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Stripe-Signature",
+                    "value": "{{stripe_webhook_signature}}",
+                    "description": "Signature header from Stripe"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \"evt_123456789\",\n    \"object\": \"event\",\n    \"api_version\": \"2024-05-01\",\n    \"created\": 1683892800,\n    \"data\": {\n        \"object\": {\n            \"id\": \"sub_12345\",\n            \"object\": \"subscription\",\n            \"status\": \"canceled\"\n        }\n    },\n    \"type\": \"customer.subscription.deleted\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/webhook/",
+                  "host": ["{{base_url}}"],
+                  "path": ["webhook", ""]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": \"success\"\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"invalid\": \"format\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/webhook/",
+                  "host": ["{{base_url}}"],
+                  "path": ["webhook", ""]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Failed to process webhook\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    {
+      "key": "stripe_webhook_signature",
+      "value": "whsec_example_signature_value",
+      "type": "string",
+      "description": "Stripe webhook signature for event verification"
+    }
+  ]
+}
